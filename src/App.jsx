@@ -8,6 +8,7 @@ import FindDoctorSearch from './Components/FindDoctorSearch/FindDoctorSearch';
 import DoctorList from './Components/DoctorCard/DoctorCard';
 import BookingConsultation from './Components/BookingConsultation';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
+import GiveReviews from './Components/ReviewForm/GiveReviews';
 import './App.css';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
         <Route path="/doctors" element={<DoctorList />} />
         <Route path="/booking" element={<BookingConsultation />} />
         <Route path="/review" element={<ReviewForm />} />
+        <Route path="/give-reviews" element={<GiveReviews />} />
       </Routes>
     </BrowserRouter>
   );
