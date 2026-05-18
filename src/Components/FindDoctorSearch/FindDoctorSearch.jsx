@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './FindDoctorSearch.css';
 
-// List of doctor specialties
 const specialties = [
     "Dentist",
     "Gynecologist/obstetrician",
@@ -12,36 +11,33 @@ const specialties = [
     "Ayurveda",
 ];
 
-const FindDoctorSearch = () => {
+const FindDoctorSearch = ({ onSearch }) => {
     const [searchText, setSearchText] = useState('');
     const [showList, setShowList] = useState(false);
 
-    // Filter specialties based on search input
     const filteredSpecialties = specialties.filter((s) =>
         s.toLowerCase().includes(searchText.toLowerCase())
     );
 
-    // Show list on focus
-    const handleFocus = () => {
-        setShowList(true);
-    };
+    const handleFocus = () => setShowList(true);
+    const handleBlur = () => setTimeout(() => setShowList(false), 150);
 
-    // Hide list on blur (small delay so click registers)
-    const handleBlur = () => {
-        setTimeout(() => setShowList(false), 150);
-    };
-
-    // Set selected specialty
     const handleSelect = (specialty) => {
         setSearchText(specialty);
         setShowList(false);
+        if (onSearch) onSearch(specialty);
+    };
+
+    const handleChange = (e) => {
+        setSearchText(e.target.value);
+        if (onSearch) onSearch(e.target.value);
     };
 
     return (
         <div className="finddoctor-search-container">
             <h2 className="finddoctor-title">Find a Doctor</h2>
             <p className="finddoctor-subtitle">
-                Book appointments with minimum wait-time & verified doctor details
+                Book appointments with minimum wait-time and verified doctor details
             </p>
             <div className="finddoctor-search-box">
                 <i className="fa fa-search search-icon"></i>
@@ -50,7 +46,7 @@ const FindDoctorSearch = () => {
                     className="finddoctor-input"
                     placeholder="Search doctors, specialties..."
                     value={searchText}
-                    onChange={(e) => setSearchText(e.target.value)}
+                    onChange={handleChange}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                 />

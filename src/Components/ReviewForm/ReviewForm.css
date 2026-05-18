@@ -1,0 +1,215 @@
+.review-form-container {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 600px;
+    margin: 100px auto 40px auto;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+}
+
+.consultation-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: #f0f4ff;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.consultation-icon {
+    font-size: 2.5rem;
+}
+
+.consultation-doctor {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0d213f;
+    margin: 0 0 4px 0;
+}
+
+.consultation-specialty {
+    color: #3685fb;
+    font-size: 0.9rem;
+    margin: 0 0 4px 0;
+    font-weight: 500;
+}
+
+.consultation-date {
+    color: #666;
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.give-feedback-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #3685fb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.give-feedback-btn:hover {
+    background-color: #0d213f;
+}
+
+.review-form-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0d213f;
+    margin-bottom: 16px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #0d213f;
+    font-size: 0.9rem;
+}
+
+.review-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.review-input:focus {
+    outline: none;
+    border-color: #3685fb;
+}
+
+.star-rating {
+    display: flex;
+    gap: 8px;
+}
+
+.star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.15s;
+    user-select: none;
+}
+
+.star.filled {
+    color: #f5a623;
+}
+
+.review-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.review-textarea:focus {
+    outline: none;
+    border-color: #3685fb;
+}
+
+.review-error {
+    color: red;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.review-btn-group {
+    display: flex;
+    gap: 12px;
+}
+
+.submit-review-btn {
+    flex: 1;
+    padding: 10px;
+    background-color: #3685fb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-review-btn:hover {
+    background-color: #0d213f;
+}
+
+.cancel-review-btn {
+    flex: 1;
+    padding: 10px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-review-btn:hover {
+    background-color: #ddd;
+}
+
+.review-success {
+    text-align: center;
+    padding: 20px;
+}
+
+.review-success .success-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.review-success h3 {
+    color: #0d213f;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.review-success p {
+    color: #555;
+    margin: 6px 0;
+}
+
+.review-preview {
+    font-style: italic;
+    color: #3685fb;
+    margin: 12px 0;
+}
+
+.reset-btn {
+    margin-top: 12px;
+    padding: 10px 24px;
+    background-color: #3685fb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.reset-btn:hover {
+    background-color: #0d213f;
+}

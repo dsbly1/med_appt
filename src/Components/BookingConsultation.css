@@ -1,0 +1,28 @@
+.booking-consultation-container {
+    min-height: 100vh;
+    background-color: #f0f4ff;
+}
+
+.booking-search-section {
+    background-color: #f0f4ff;
+    padding: 100px 20px 40px 20px;
+    text-align: center;
+}
+
+.booking-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #0d213f;
+    margin-bottom: 8px;
+}
+
+.booking-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.booking-doctors-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+}
