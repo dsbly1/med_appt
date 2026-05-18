@@ -9,6 +9,7 @@ import DoctorList from './Components/DoctorCard/DoctorCard';
 import BookingConsultation from './Components/BookingConsultation';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
 import GiveReviews from './Components/ReviewForm/GiveReviews';
+import ReviewFormApp from './Components/ReviewForm/ReviewFormApp';
 import './App.css';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         <Route path="/booking" element={<BookingConsultation />} />
         <Route path="/review" element={<ReviewForm />} />
         <Route path="/give-reviews" element={<GiveReviews />} />
+        <Route path="/appointments" element={<ReviewFormApp />} />
       </Routes>
     </BrowserRouter>
   );
