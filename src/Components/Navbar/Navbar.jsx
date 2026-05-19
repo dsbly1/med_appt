@@ -58,7 +58,6 @@ const Navbar = () => {
                 <li className="link"><Link to="/booking">Appointments</Link></li>
                 {authtoken ? (
                     <>
-                        {/* Profile dropdown */}
                         <li className="link welcome-user" style={{ position: 'relative' }}>
                             <span
                                 style={{ color: '#0d213f', fontWeight: 500, cursor: 'pointer' }}
@@ -67,7 +66,25 @@ const Navbar = () => {
                                 👤 Welcome, {username} ▾
                             </span>
                             {showProfile && (
-                                <ProfileCard onClose={() => setShowProfile(false)} />
+                                <div className="dropdown-menu" style={{ display: 'block', position: 'absolute', top: '100%', right: 0, zIndex: 9999 }}>
+                                    <ProfileCard onClose={() => setShowProfile(false)} />
+                                    <ul style={{ listStyle: 'none', padding: '8px 0', margin: 0, background: '#fff', borderRadius: '0 0 12px 12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+                                        <li>
+                                            <Link to="/profile"
+                                                onClick={() => setShowProfile(false)}
+                                                style={{ display: 'block', padding: '10px 20px', color: '#0d213f', textDecoration: 'none', fontWeight: 500 }}>
+                                                ✏️ Edit Profile
+                                            </Link>
+                                        </li>
+                                        <li>
+                                            <Link to="/appointments"
+                                                onClick={() => setShowProfile(false)}
+                                                style={{ display: 'block', padding: '10px 20px', color: '#0d213f', textDecoration: 'none', fontWeight: 500 }}>
+                                                📋 My Appointments
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
                             )}
                         </li>
                         <li className="link">
