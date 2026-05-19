@@ -1,0 +1,95 @@
+.reports-page {
+    min-height: 100vh;
+    background-color: #f0f4ff;
+    padding: 100px 20px 40px;
+}
+
+.reports-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(54, 133, 251, 0.12);
+    overflow: hidden;
+    border-top: 5px solid #3685fb;
+}
+
+.reports-header {
+    background: linear-gradient(135deg, #3685fb, #0d213f);
+    padding: 24px 28px;
+    color: #fff;
+}
+
+.reports-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+}
+
+.reports-header p {
+    margin: 0;
+    opacity: 0.85;
+    font-size: 0.9rem;
+}
+
+.reports-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.reports-table th {
+    background-color: #0d213f;
+    color: #fff;
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.reports-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.88rem;
+    color: #333;
+}
+
+.reports-table tr:last-child td { border-bottom: none; }
+.reports-table tr:hover td { background-color: #f0f4ff; }
+
+.report-type-badge {
+    background-color: #e8f0fe;
+    color: #3685fb;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.view-btn {
+    background-color: #3685fb;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.view-btn:hover { background-color: #0d213f; }
+
+.download-btn {
+    background-color: #28a745;
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.download-btn:hover { background-color: #1e7e34; }
+
+@media (max-width: 768px) {
+    .reports-table { display: block; overflow-x: auto; }
+}

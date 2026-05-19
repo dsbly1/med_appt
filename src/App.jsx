@@ -12,6 +12,7 @@ import GiveReviews from './Components/ReviewForm/GiveReviews';
 import ReviewFormApp from './Components/ReviewForm/ReviewFormApp';
 import Notification from './Components/Notification/Notification';
 import ProfileForm from './Components/ProfileCard/ProfileForm';
+import ReportsLayout from './Components/ReportsLayout/ReportsLayout';
 import './App.css';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/give-reviews" element={<GiveReviews />} />
           <Route path="/appointments" element={<ReviewFormApp />} />
           <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/reports" element={<ReportsLayout />} />
         </Routes>
       </Notification>
     </BrowserRouter>
