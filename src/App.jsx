@@ -10,24 +10,27 @@ import BookingConsultation from './Components/BookingConsultation';
 import ReviewForm from './Components/ReviewForm/ReviewForm';
 import GiveReviews from './Components/ReviewForm/GiveReviews';
 import ReviewFormApp from './Components/ReviewForm/ReviewFormApp';
+import Notification from './Components/Notification/Notification';
 import './App.css';
 
 function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Landing_Page />} />
-        <Route path="/sign-up" element={<Sign_Up />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/instant-consultation" element={<InstantConsultation />} />
-        <Route path="/find-doctor" element={<FindDoctorSearch />} />
-        <Route path="/doctors" element={<DoctorList />} />
-        <Route path="/booking" element={<BookingConsultation />} />
-        <Route path="/review" element={<ReviewForm />} />
-        <Route path="/give-reviews" element={<GiveReviews />} />
-        <Route path="/appointments" element={<ReviewFormApp />} />
-      </Routes>
+      <Notification>
+        <Routes>
+          <Route path="/" element={<Landing_Page />} />
+          <Route path="/sign-up" element={<Sign_Up />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/instant-consultation" element={<InstantConsultation />} />
+          <Route path="/find-doctor" element={<FindDoctorSearch />} />
+          <Route path="/doctors" element={<DoctorList />} />
+          <Route path="/booking" element={<BookingConsultation />} />
+          <Route path="/review" element={<ReviewForm />} />
+          <Route path="/give-reviews" element={<GiveReviews />} />
+          <Route path="/appointments" element={<ReviewFormApp />} />
+        </Routes>
+      </Notification>
     </BrowserRouter>
   );
 }

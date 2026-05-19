@@ -17,6 +17,8 @@ const DoctorCard = ({ name, specialty, experience, rating, reviews, image }) => 
     const [appointmentDetails, setAppointmentDetails] = useState(null);
 
     const handleBookingSuccess = (details) => {
+        localStorage.setItem("doctorData", JSON.stringify({ name, specialty }));
+        localStorage.setItem(name, JSON.stringify(details));
         setIsBooked(true);
         setAppointmentDetails(details);
         setShowForm(false);
@@ -114,3 +116,4 @@ const DoctorList = ({ searchQuery }) => {
 };
 
 export default DoctorList;
+// localStorage integration handled in handleBookingSuccess
