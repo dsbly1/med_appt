@@ -17,16 +17,24 @@ const DoctorCard = ({ name, specialty, experience, rating, reviews, image }) => 
     const [appointmentDetails, setAppointmentDetails] = useState(null);
 
     const handleBookingSuccess = (details) => {
-        localStorage.setItem("doctorData", JSON.stringify({ name, specialty }));
-        localStorage.setItem(name, JSON.stringify(details));
         setIsBooked(true);
         setAppointmentDetails(details);
         setShowForm(false);
+
+        // Save to localStorage with consistent keys
+        localStorage.setItem('doctorData', JSON.stringify({ name, specialty }));
+        localStorage.setItem('appointmentData', JSON.stringify(details));
+
+        // Dispatch custom event so Notification updates immediately
+        window.dispatchEvent(new Event('appointmentBooked'));
     };
 
     const handleCancel = () => {
         setIsBooked(false);
         setAppointmentDetails(null);
+        localStorage.removeItem('doctorData');
+        localStorage.removeItem('appointmentData');
+        window.dispatchEvent(new Event('appointmentBooked'));
     };
 
     return (
@@ -52,19 +60,19 @@ const DoctorCard = ({ name, specialty, experience, rating, reviews, image }) => 
                             <div className="confirmed-details">
                                 {appointmentDetails.date} at {appointmentDetails.time}
                             </div>
-                            <div className="confirmed-details">
-                                {appointmentDetails.name}
-                            </div>
+                            <div className="confirmed-details">{appointmentDetails.name}</div>
                         </div>
                     )}
                     <div className="doctor-card-options-container">
                         {!isBooked ? (
-                            <button className="book-appointment-btn" onClick={() => setShowForm(true)}>
+                            <button className="book-appointment-btn"
+                                onClick={() => setShowForm(true)}>
                                 <div>Book Appointment</div>
                                 <div>No Booking Fee</div>
                             </button>
                         ) : (
-                            <button className="cancel-appointment-btn" onClick={handleCancel}>
+                            <button className="cancel-appointment-btn"
+                                onClick={handleCancel}>
                                 <div>Cancel Appointment</div>
                                 <div>Free Cancellation</div>
                             </button>
@@ -93,8 +101,7 @@ const DoctorList = ({ searchQuery }) => {
     const filteredDoctors = searchQuery
         ? doctors.filter((doc) =>
             doc.specialty.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            doc.name.toLowerCase().includes(searchQuery.toLowerCase())
-          )
+            doc.name.toLowerCase().includes(searchQuery.toLowerCase()))
         : doctors;
 
     return (
@@ -116,4 +123,3 @@ const DoctorList = ({ searchQuery }) => {
 };
 
 export default DoctorList;
-// localStorage integration handled in handleBookingSuccess

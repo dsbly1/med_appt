@@ -52,7 +52,7 @@ const Navbar = () => {
             </div>
             <ul className="nav__links active">
                 <li className="link"><Link to="/">Home</Link></li>
-                <li className="link"><a href="#">Appointments</a></li>
+                <li className="link"><Link to="/booking">Appointments</Link></li>
                 {authtoken ? (
                     <>
                         <li className="link">

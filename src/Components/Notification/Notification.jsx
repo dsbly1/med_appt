@@ -8,41 +8,47 @@ const Notification = ({ children }) => {
     const [appointmentData, setAppointmentData] = useState(null);
     const [showNotification, setShowNotification] = useState(true);
 
-    useEffect(() => {
+    const loadData = () => {
         const storedUsername = sessionStorage.getItem('email');
         const storedDoctorData = JSON.parse(localStorage.getItem('doctorData'));
-        const storedAppointmentData = JSON.parse(
-            localStorage.getItem(storedDoctorData?.name)
-        );
+        const storedAppointmentData = JSON.parse(localStorage.getItem('appointmentData'));
 
         if (storedUsername) {
             setIsLoggedIn(true);
             setUsername(storedUsername);
         }
-
-        if (storedDoctorData) {
-            setDoctorData(storedDoctorData);
-        }
-
+        if (storedDoctorData) setDoctorData(storedDoctorData);
         if (storedAppointmentData) {
             setAppointmentData(storedAppointmentData);
+            setShowNotification(true);
         }
+    };
+
+    useEffect(() => {
+        loadData();
+
+        // Listen for storage changes across pages
+        window.addEventListener('storage', loadData);
+        window.addEventListener('appointmentBooked', loadData);
+
+        return () => {
+            window.removeEventListener('storage', loadData);
+            window.removeEventListener('appointmentBooked', loadData);
+        };
     }, []);
 
-    // Hide notification when appointment is cancelled
     const handleCancel = () => {
         setShowNotification(false);
         setAppointmentData(null);
-        localStorage.removeItem(doctorData?.name);
+        setDoctorData(null);
+        localStorage.removeItem('appointmentData');
         localStorage.removeItem('doctorData');
     };
 
     return (
         <div>
             {children}
-
-            {/* Notification card */}
-            {isLoggedIn && appointmentData && showNotification && (
+            {appointmentData && showNotification && (
                 <div className="notification-wrapper">
                     <div className="appointment-card">
                         <div className="appointment-card__header">
@@ -50,41 +56,29 @@ const Notification = ({ children }) => {
                             <h3 className="appointment-card__title">
                                 Appointment Confirmed!
                             </h3>
-                            <button
-                                className="notification-close"
-                                onClick={() => setShowNotification(false)}
-                            >
-                                ✕
-                            </button>
+                            <button className="notification-close"
+                                onClick={() => setShowNotification(false)}>✕</button>
                         </div>
-
                         <div className="appointment-card__content">
                             <p className="appointment-card__message">
-                                <strong>👤 Patient:</strong>{' '}
-                                {username.split('@')[0]}
+                                <strong>👤 Patient:</strong> {appointmentData?.name}
                             </p>
                             <p className="appointment-card__message">
                                 <strong>🩺 Doctor:</strong> {doctorData?.name}
                             </p>
                             <p className="appointment-card__message">
-                                <strong>🏥 Specialty:</strong>{' '}
-                                {doctorData?.specialty}
+                                <strong>🏥 Specialty:</strong> {doctorData?.specialty}
                             </p>
                             <p className="appointment-card__message">
-                                <strong>📅 Date:</strong>{' '}
-                                {appointmentData?.date}
+                                <strong>📅 Date:</strong> {appointmentData?.date}
                             </p>
                             <p className="appointment-card__message">
-                                <strong>⏰ Time:</strong>{' '}
-                                {appointmentData?.time}
+                                <strong>⏰ Time:</strong> {appointmentData?.time}
                             </p>
                         </div>
-
                         <div className="appointment-card__actions">
-                            <button
-                                className="cancel-notification-btn"
-                                onClick={handleCancel}
-                            >
+                            <button className="cancel-notification-btn"
+                                onClick={handleCancel}>
                                 Cancel Appointment
                             </button>
                         </div>
