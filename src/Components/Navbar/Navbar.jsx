@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
+import ProfileCard from "../ProfileCard/ProfileCard";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const authtoken = sessionStorage.getItem("auth-token");
     const email = sessionStorage.getItem("email");
     const username = email ? email.split("@")[0] : "";
+    const [showProfile, setShowProfile] = useState(false);
 
     const handleClick = () => {
         const navLinks = document.querySelector(".nav__links");
@@ -35,7 +37,8 @@ const Navbar = () => {
             <div className="nav__logo">
                 <Link to="/">
                     StayHealthy
-                    <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 1000 1000" style={{fill:"#3685fb"}}>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26"
+                        viewBox="0 0 1000 1000" style={{fill:"#3685fb"}}>
                         <title>Doctor With Stethoscope SVG icon</title>
                         <g><g>
                             <path d="M499.8,10c91.7,0,166,74.3,166,166c0,91.7-74.3,166-166,166c-91.7,0-166-74.3-166-166C333.8,84.3,408.1,10,499.8,10z"></path>
@@ -55,10 +58,17 @@ const Navbar = () => {
                 <li className="link"><Link to="/booking">Appointments</Link></li>
                 {authtoken ? (
                     <>
-                        <li className="link">
-                            <span style={{ color: '#0d213f', fontWeight: 500 }}>
-                                Welcome, {username}
+                        {/* Profile dropdown */}
+                        <li className="link welcome-user" style={{ position: 'relative' }}>
+                            <span
+                                style={{ color: '#0d213f', fontWeight: 500, cursor: 'pointer' }}
+                                onClick={() => setShowProfile(!showProfile)}
+                            >
+                                👤 Welcome, {username} ▾
                             </span>
+                            {showProfile && (
+                                <ProfileCard onClose={() => setShowProfile(false)} />
+                            )}
                         </li>
                         <li className="link">
                             <button className="btn1" onClick={handleLogout}>Logout</button>
@@ -66,8 +76,12 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <li className="link"><Link to="/sign-up"><button className="btn1">Sign Up</button></Link></li>
-                        <li className="link"><Link to="/login"><button className="btn1">Login</button></Link></li>
+                        <li className="link">
+                            <Link to="/sign-up"><button className="btn1">Sign Up</button></Link>
+                        </li>
+                        <li className="link">
+                            <Link to="/login"><button className="btn1">Login</button></Link>
+                        </li>
                     </>
                 )}
             </ul>

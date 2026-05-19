@@ -1,7 +1,10 @@
 import React from "react";
 import "./LandingPage.css";
+import { useNavigate } from "react-router-dom";
 
 const Landing_Page = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="hero-section">
       <div>
@@ -19,9 +22,9 @@ const Landing_Page = () => {
           <h4>
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque at quae ducimus. Suscipit omnis quibusdam non cum rem voluptatem!
           </h4>
-          <a href="#services">
-            <button className="button">Get Started</button>
-          </a>
+          <button className="button" onClick={() => navigate("/booking")}>
+            Get Started
+          </button>
         </div>
       </div>
     </section>
