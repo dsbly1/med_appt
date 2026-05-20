@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const http = require('http');
 const connectToMongo = require('./db');
 const app = express();
 
@@ -23,5 +22,12 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-console.log(`Server is running on port http://localhost:${PORT}`);
+    console.log(`Server is running on port http://localhost:${PORT}`);
 });
+
+// Keep Render awake - ping every 14 minutes
+setInterval(() => {
+    fetch('https://med-appt.onrender.com')
+        .then(() => console.log('Keeping server alive...'))
+        .catch(() => {});
+}, 840000);
