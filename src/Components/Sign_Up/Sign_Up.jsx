@@ -10,47 +10,59 @@ const Sign_Up = () => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('');
     const [showerr, setShowerr] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const register = async (e) => {
         e.preventDefault();
+        setShowerr('');
+        setLoading(true);
 
-        // Phone validation - must be exactly 10 digits
         if (!/^\d{10}$/.test(phone)) {
             setShowerr("Phone number must be exactly 10 digits.");
+            setLoading(false);
             return;
         }
 
-        const response = await fetch(`${API_URL}/api/auth/register`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                password: password,
-                phone: phone,
-            }),
-        });
+        try {
+            const response = await fetch(`${API_URL}/api/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    phone: phone,
+                    role: role,
+                }),
+            });
 
-        const json = await response.json();
+            const json = await response.json();
 
-        if (json.authtoken) {
-            sessionStorage.setItem("auth-token", json.authtoken);
-            sessionStorage.setItem("name", name);
-            sessionStorage.setItem("phone", phone);
-            sessionStorage.setItem("email", email);
-            navigate("/");
-            window.location.reload();
-        } else {
-            if (json.errors) {
-                for (const error of json.errors) {
-                    setShowerr(error.msg);
-                }
+            if (json.authtoken) {
+                sessionStorage.setItem("auth-token", json.authtoken);
+                sessionStorage.setItem("name", name);
+                sessionStorage.setItem("phone", phone);
+                sessionStorage.setItem("email", email);
+                sessionStorage.setItem("role", role);
+                navigate("/");
+                window.location.reload();
             } else {
-                setShowerr(json.error);
+                if (json.errors) {
+                    for (const error of json.errors) {
+                        setShowerr(error.msg);
+                    }
+                } else {
+                    setShowerr(json.error || "Signup failed. Please try again.");
+                }
             }
+        } catch (err) {
+            setShowerr("Cannot connect to server. Please try again later.");
+            console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -68,8 +80,6 @@ const Sign_Up = () => {
                 </div>
                 <div className="signup-form">
                     <form method="POST" onSubmit={register}>
-
-                        {/* Role */}
                         <div className="form-group">
                             <label htmlFor="role">Role</label>
                             <select
@@ -84,8 +94,6 @@ const Sign_Up = () => {
                                 <option value="doctor">Doctor</option>
                             </select>
                         </div>
-
-                        {/* Name */}
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input
@@ -99,8 +107,6 @@ const Sign_Up = () => {
                                 required
                             />
                         </div>
-
-                        {/* Phone */}
                         <div className="form-group">
                             <label htmlFor="phone">Phone</label>
                             <input
@@ -114,8 +120,6 @@ const Sign_Up = () => {
                                 required
                             />
                         </div>
-
-                        {/* Email */}
                         <div className="form-group">
                             <label htmlFor="email">Email</label>
                             <input
@@ -126,13 +130,10 @@ const Sign_Up = () => {
                                 id="email"
                                 className="form-control"
                                 placeholder="Enter your email"
-                                aria-describedby="helpId"
                                 required
                             />
                             {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
                         </div>
-
-                        {/* Password */}
                         <div className="form-group">
                             <label htmlFor="password">Password</label>
                             <input
@@ -146,16 +147,15 @@ const Sign_Up = () => {
                                 required
                             />
                         </div>
-
-                        {/* Buttons */}
                         <div className="btn-group">
-                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <button type="submit" className="btn btn-primary" disabled={loading}>
+                                {loading ? "Signing up..." : "Submit"}
+                            </button>
                             <button type="reset" className="btn btn-danger" onClick={() => {
                                 setName(''); setEmail(''); setPhone('');
                                 setPassword(''); setRole(''); setShowerr('');
                             }}>Reset</button>
                         </div>
-
                     </form>
                 </div>
             </div>
